@@ -1,4 +1,0 @@
-cache
-=====
-
-cache adapter
