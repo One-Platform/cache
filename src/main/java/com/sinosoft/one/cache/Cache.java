@@ -7,7 +7,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * 缓存接口，提供对缓存的基本操作。
  * 
- * @version 1.0
+ * @version 0.0.1
  * @date 2013/12/26
  * @author ZFB
  *

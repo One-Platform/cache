@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 import com.sinosoft.one.cache.exception.CacheBuilderException;
 import com.sinosoft.one.cache.guava.GuavaCacheBuilder;
 
-final class CacheBuilderSelector<K, V> implements CacheBuilder<K, V> {
+public final class CacheBuilderSelector<K, V> implements CacheBuilder<K, V> {
 
 	private static CacheBuilder<Object, Object> cacheBuilder;
 	private final static String CACHE_TYPE = "cache.type";
