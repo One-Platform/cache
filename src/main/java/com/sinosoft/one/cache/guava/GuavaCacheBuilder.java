@@ -62,9 +62,6 @@ public final class GuavaCacheBuilder<K,V> implements CacheBuilder<K,V> {
 		com.google.common.cache.Cache<K1, V1> cache=cacheBuilder.build();
 	    return new GuavaCache<K1, V1>(cache);
 	}
-	public long getPriority() {
-		return 0;
-	}
 	
 	/**
 	 * 移除监听器
