@@ -18,6 +18,7 @@ public class CacheBuilderTest {
 	@Before
 	public void initCache() {
 		//解决merge
+		//故意用来测试github merge的
 		//针对整个cache定义一个原子操作，根据给定的key获取value，需要重写原子操作load(V key)
 		//使用默认的同步方式的reload(K key, V oldValue)方法
 		loaderCache=CacheBuilderSelector.newBuilder()
