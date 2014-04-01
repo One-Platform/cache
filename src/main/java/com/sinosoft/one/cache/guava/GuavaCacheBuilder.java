@@ -9,7 +9,7 @@ import com.sinosoft.one.cache.LoadingCache;
 
 public final class GuavaCacheBuilder<K,V> implements CacheBuilder<K,V> {
 	
-	private com.google.common.cache.CacheBuilder<Object, Object> cacheBuilder;
+	private com.google.common.cache.CacheBuilder cacheBuilder;
 	
 	
 	GuavaCacheBuilder() {
@@ -21,8 +21,8 @@ public final class GuavaCacheBuilder<K,V> implements CacheBuilder<K,V> {
 	 * 构造一个默认的CacheBuilder，即：没有任何形式的缓存策略。
 	 * @return
 	 */
-	public static GuavaCacheBuilder<Object, Object> newBuilder(){
-		return new GuavaCacheBuilder<Object, Object>();
+	public static GuavaCacheBuilder newBuilder(){
+		return new GuavaCacheBuilder();
 	}
 
 	public GuavaCacheBuilder<K, V> maximumSize(long size){

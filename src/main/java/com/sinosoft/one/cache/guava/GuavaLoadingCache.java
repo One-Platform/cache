@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import com.sinosoft.one.cache.LoadingCache;
+import com.sinosoft.one.cache.exception.CacheException;
 
 public class GuavaLoadingCache<K, V> extends GuavaCache<K, V> implements
 		LoadingCache<K, V> {
@@ -24,8 +25,11 @@ public class GuavaLoadingCache<K, V> extends GuavaCache<K, V> implements
 	 * @throws ExecutionException
 	 */
 	public V get(K key) throws ExecutionException {
-		return loadingCache.get(key);
-
+        try {
+            return loadingCache.get(key);
+        } catch (RuntimeException e){
+            throw  new CacheException("com.sinosoft.one.cache.guava.GuavaLoadingCache.get(K key)",e);
+        }
 	}
 	
 	/**

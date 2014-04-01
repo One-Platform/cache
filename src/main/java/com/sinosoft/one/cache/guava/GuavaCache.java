@@ -5,6 +5,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 
 import com.sinosoft.one.cache.Cache;
+import com.sinosoft.one.cache.exception.CacheException;
 
 public class GuavaCache<K, V> implements Cache<K, V> {
 
@@ -28,7 +29,11 @@ public class GuavaCache<K, V> implements Cache<K, V> {
 
 	public V get(K key, Callable<? extends V> valueLoader)
 			throws ExecutionException {
-		return cache.get(key, valueLoader);
+        try {
+            return cache.get(key, valueLoader);
+        } catch (RuntimeException e){
+            throw  new CacheException("com.sinosoft.one.cache.guava.GuavaCache.get(K key, Callable<? extends V> valueLoader)",e);
+        }
 	}
 
 	public void remove(Object key) {
