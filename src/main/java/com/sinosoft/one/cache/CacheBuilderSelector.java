@@ -9,24 +9,25 @@ import com.sinosoft.one.cache.guava.GuavaCacheBuilder;
 
 public final class CacheBuilderSelector<K, V> implements CacheBuilder<K, V> {
 
-	private static CacheBuilder<Object, Object> cacheBuilder;
+	private static CacheBuilder cacheBuilder;
 	private final static String CACHE_TYPE = "cache.type";
 	
 	/**
 	 * 通过配置文件选择所使用的缓存，默认为guava cache
-	 * 
-	 * @param name
+	 *
+	 * @param fileName
 	 *        类路径下缓存配置文件的名字
-	 * @throws CacheBuilderException 
+	 * @throws CacheBuilderException
 	 */
 	CacheBuilderSelector(String fileName){
-		initCacheBuilder();
-		
-	}	
-	
+		initCacheBuilder(fileName);
+	}
+    CacheBuilderSelector(){
+        initCacheBuilder(CacheConfig.DEFAULT_FILENAME);
+    }
 	@SuppressWarnings("unchecked")
-	void initCacheBuilder() {
-		String cacheType = (String) CacheConfig.getProperties().get(CACHE_TYPE);
+	void initCacheBuilder(String fileName) {
+		String cacheType = (String) CacheConfig.getProperties(fileName).get(CACHE_TYPE);
 		// 默认是guava cache
 		if (null == cacheType || "".equals(cacheType)) {
 			cacheBuilder = GuavaCacheBuilder.newBuilder();
@@ -67,14 +68,14 @@ public final class CacheBuilderSelector<K, V> implements CacheBuilder<K, V> {
 	 * 默认的CacheBuilder
 	 * 
 	 * 构造一个默认的CacheBuilder，即：没有任何形式的缓存策略。
-	 * @param name
+	 * @param fileName
 	 *        类路径下缓存配置文件的名字
 	 * @return
 	 * @throws CacheBuilderException 
 	 */
-	public static CacheBuilderSelector<Object, Object> newBuilder(
+	public static CacheBuilderSelector newBuilder(
 			String fileName) throws CacheBuilderException {
-		return new CacheBuilderSelector<Object, Object>(fileName);
+		return new CacheBuilderSelector(fileName);
 	}
 
 	public CacheBuilderSelector<K, V> maximumSize(long size) {
@@ -110,9 +111,9 @@ public final class CacheBuilderSelector<K, V> implements CacheBuilder<K, V> {
 		return cacheBuilder.build();
 	}
 
-	public static CacheBuilderSelector<Object, Object> newBuilder()
+	public static CacheBuilderSelector newBuilder()
 			throws CacheBuilderException {
-		return new CacheBuilderSelector<Object, Object>(CacheConfig.DEFAULT_FILENAME);
+		return new CacheBuilderSelector(CacheConfig.DEFAULT_FILENAME);
 	}
 	
 	/**
